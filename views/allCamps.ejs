@@ -1,0 +1,44 @@
+<% layout('./layout/boilerplate.ejs') %>
+
+<div class="row  mb-2">
+<div id="map" class="col-md-3 p-0 allcampmap" ></div>
+</div>
+  <% for (let camp of camps) {%>
+  <div class="row  mb-2 border allcampcard">
+    <div class="col-sm-5 col-md-4 col-lg-3 p-0 allcampimgcol ">
+      <%if (camp.image[0]){%> 
+      <img
+        
+        src="<%=camp.image[0].url%>"
+        class="img-fluid img-thumbnail allcampimg "
+        
+        alt="..."
+      />
+      <%}else{%>
+        <img
+        src="/1200px-No_image_3x4.svg.png"
+        class="img-fluid img-thumbnail allcampimg"
+        
+        alt="..."
+      />
+        <%}%>  
+      
+    </div>
+
+    <div class="col-sm-7 col-md-8 col-lg-9 ms-0 p-0">
+      <div class="card-body ">
+        <h5 class="card-title"><%= camp.title %>,<%= camp.location %></h5>
+        <p class="card-text"><%=camp.description%></p>
+
+        <a href="/Allcamps/<%=camp._id%>" class="btn btn-primary">Detail</a>
+      </div>
+    </div>
+  </div>
+
+  <%} %>
+
+<script>
+  const map_t="<%=process.env.Map_token%>";
+  const camps = {features:<%- JSON.stringify(camps) %>};
+</script>
+<script src="/js/cluster.js"></script>

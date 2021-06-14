@@ -1,0 +1,117 @@
+
+.boilerbkg{
+    background-image:url("/martin-jernberg-nE2gf1scItI-unsplash.jpg");
+    background-size:cover; 
+    background-attachment: fixed;
+
+   
+}
+.boilerbkg .navbar{
+    background:linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5))
+}
+
+.boilerbkg  .card-body{
+    width: 100%;
+    height: 100%;
+    text-shadow: black;
+    color: black;
+
+    background:linear-gradient(rgba(226, 205, 205, 0.5),rgba(255, 255, 255, 0.062));
+
+}
+input,textarea{
+    background:linear-gradient(rgba(226, 205, 205, 0.5),rgba(255, 255, 255, 0.062));
+    opacity: 0.5;
+    color: black;
+    
+}
+label{
+    font-weight: 600;
+}
+
+
+.homebody{
+    display: flex;
+    flex-direction: column;
+    
+    height: 100vh;
+    
+   
+}
+.homebody{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/martin-jernberg-nE2gf1scItI-unsplash.jpg"); 
+    background-size:cover; 
+    
+ 
+
+}
+ #info{
+   color: aliceblue;
+   flex-grow: 1;
+   display: flex;
+   flex-direction:column;
+   align-self: center;
+   justify-content: center;
+   margin-top:auto;
+
+  
+}
+
+@media(min-width:590px)
+{ .allcampmap{
+    height: 500px;
+    width: 100%;
+
+      }
+
+    .allcampimg{
+        height: 250px; 
+        width: 250px;
+
+
+    }
+}
+
+@media(max-width:590px)
+{ .allcampmap{
+    height: 500px;
+    width: 100%;
+
+      }
+   
+    .allcampimg{
+        height: 200px;
+        width: 200px;
+
+
+    }
+}
+@media(max-width:577px)
+{ .allcampmap{
+    height: 500px;
+    width: 75%;
+    margin:auto;
+
+      }
+   
+ 
+    .allcampcard{
+        display: flex;
+        flex-direction: column;
+        border: solid;
+        width: 78%;
+        margin: auto;
+        justify-content: center;
+        background:linear-gradient(rgba(226, 205, 205, 0.5),rgba(255, 255, 255, 0.062));
+        
+    }
+    .allcampimgcol{
+        height: 200px;
+        width: 200px;
+        flex-grow: 1;
+        align-self: center;
+       
+
+
+    } 
+}

@@ -1,0 +1,125 @@
+<% layout('layout/boilerplate.ejs') %>
+<link rel="stylesheet" href="/css/star.css">
+
+<div class="row justify-content-center mb-2">
+  <div class="col-md-6 ">
+  
+    <div class="card" style="
+    background:linear-gradient(rgba(226, 205, 205, 0.5),rgba(255, 255, 255, 0.062));">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% if (!detail.image.length<1) { %>
+          <%detail.image.forEach((img,i)=>{%>
+          <div class="carousel-item <%=i==0?"active":""%>">
+            <img src="<%=img.url%>" class="card-img-top" style="height:70vh;"  alt="" />
+          </div>
+          <%} )%> 
+          <%}else{%>
+            <img src="/1200px-No_image_3x4.svg.png" class="card-img-top" style="height:70vh;"  alt="" />
+            <%} %>  
+        </div>
+        <% if (detail.image.length>1) { %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <% } %>
+      </div>
+      
+    
+      <div class="card-body">
+        <h5 class="card-title text-center"><%=detail.title%></h5>
+        <p class="card-text"><b>Author: </b><%=detail.author.username%></p>
+        <p class="card-text"><b>Location: </b><%=detail.location%></p>
+        <p class="card-text"><b>Description: </b><%=detail.description%></p>
+        <p class="card-text"><b>Price: </b><%=detail.price%></p>
+        <% if (curruser && detail.author.username==curruser.username ){%> 
+        <div class="d-grid gap-2 d-md-block">
+          <a href="/Allcamps/<%=detail._id %>/edit" class="btn btn-primary d-inline">Edit</a>
+          
+          <form class=" d-inline"
+            action="/Allcamps/<%=detail._id %>/delete?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-danger">Delete</button>
+          </form>
+          
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div id='map'class="mb-1" style='width: 100%; height: 300px;'></div>
+    <div class="card" style="
+    background:linear-gradient(rgba(255, 253, 253, 0.87),rgba(255, 255, 255, 0.356));">
+      <div class="card-header">
+        Enter comments
+      </div>
+      <div class="card-body">
+        <form action="/Allcamps/<%=detail._id %>/review" method="POST"  class="needs-validation" novalidate >
+          <div>
+        <!-- Review[rating] -->
+        <fieldset class="starability-heart">
+          <legend>First rating:</legend>
+          <input type="radio" id="no-rate" class="input-no-rate" name="Review[rating]" value="1" checked aria-label="No rating." />
+          <input type="radio" id="first-rate1" name="Review[rating]" value="1" />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="Review[rating]" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="Review[rating]" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="Review[rating]" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="Review[rating]" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+          </div>
+          <div><label for="comment">Review</label>
+            <textarea name="Review[comment]" class="form-control form-control-sm mb-2" id="comment" cols="30" rows="5" required></textarea>
+            <div class="invalid-feedback mb-1">
+              Can't be empty
+            </div>
+          </div>
+          <button class="btn btn-primary">Add Review</button>
+        </form>
+      </div>
+    </div>
+    <% if (reviews) { %>
+      <% for(let review of reviews) {%>
+
+      <div class="card" style="
+    background:linear-gradient(rgba(255, 253, 253, 0.87),rgba(255, 255, 255, 0.356));">
+        <div class="card-header">
+          review
+        </div>
+        <div class="card-body">
+        
+          <p class="starability-result" data-rating=<%=review.rating%>>
+            Rated: <%=review.rating%>
+          </p>
+          <p class="card-text"><%=review.comment%> </p>
+          <footer class="blockquote-footer">By <cite title="Source Title"><%=review.author.username%></cite></footer>
+          <%if(curruser && review.author.username==curruser.username){%> 
+          <form  action="/Allcamps/<%=detail.id%>/review/<%=review._id%>/delete?_method=DELETE"
+            method="POST">
+          <button class="btn btn-danger">DELETE</button>
+          </form>
+          <% } %> 
+        </div>
+      </div>
+      <% } %> 
+    <% } %>
+    
+  </div>
+
+</div>
+<script>
+  const map_t="<%=process.env.Map_token%>";
+  const camp = <%- JSON.stringify(detail) %>;
+</script>
+<script src="/js/map.js"></script>

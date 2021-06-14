@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campify</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/boilerplate.css">
+    <!-- <link rel="stylesheet" href="/css/flex.css"> -->
+    
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css' rel='stylesheet' />
+
+  </head>
+<!-- vh depends on actual height of view port and changes wrt the window size-->
+  <body class="d-flex flex-column  vh-100 boilerbkg">
+    <%- include("../partials/nav.ejs") %>
+    <%- include("../partials/flashMessage.ejs") %> 
+    
+    <div class="container mt-5"><%-body-%></div>
+   
+    <%- include("../partials/footer.ejs") %>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/client_val.js" ></script>
+  </body>
+</html>
